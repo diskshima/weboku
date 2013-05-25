@@ -1,0 +1,5 @@
+<u>
+    $forall Link title url _ _ _ _ <- links
+        <li><a href=#{url}> #{title}
+<hr>
+<p><a href=@{HomeR}>Get back
