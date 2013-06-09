@@ -7,5 +7,5 @@ create function get_links_for_user(login_id_in varchar(50))
     from links l
          inner join users us on l.user_id = us.id
          inner join urls ur on l.url_id = ur.id
-    where us.login_id = login_id_in
+    where us.login_id = $1 
 $$ language sql;
