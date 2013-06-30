@@ -11,6 +11,15 @@ main = do
     conn <- connectToDB
     getLinksForUser conn "daisuke"
 
+upsertLink conn userId link = do
+    -- Upsert Link
+    -- Upsert Tags
+    -- Upsert Entry
+    stmt <- prepareUpsert conn
+
+prepareUpsert conn =
+    prepare conn "PERFORM upsert_link"
+
 insertUrl conn = do
     stmt <- prepareInsertUrl conn
     execute stmt [toSql "daisuke", toSql "http://www.google.com/"]
@@ -50,6 +59,3 @@ sqlToLink x = case x of
 sqlToTags x = case x of
     [tags] -> fromSql tags
     _ -> error "Could not build tags."
-
--- Test data
--- testLink = Link { title = "Google", url = "http://www.google.com", date = (epochToClockTime 1358690486), private = False, tags = ["search", "google"], comment = Nothing }
